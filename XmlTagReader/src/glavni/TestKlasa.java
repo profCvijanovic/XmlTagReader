@@ -9,19 +9,18 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import metode.XmlMetode;
+import model.Category;
 import model.Sport;
 
 public class TestKlasa {
 
 	public static void main(String[] args) {
 		
-		List<Sport> listaSportova = new ArrayList<Sport>();
+		Category c = new Category();
 		
 		try {
-			listaSportova = XmlMetode.parseSportsXML();
-			for(Sport s: listaSportova) {
-				System.out.println(s.getId() + " " + s.getName());
-			}
+			c = XmlMetode.parseCategoryXML("event-14742673.xml");
+			System.out.println(c.getId() +  " " + c.getId_sport() + " " + c.getName());
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
