@@ -21,7 +21,7 @@ public class XmlMetode {
 	
 	   public static List<Sport> parseSportsXML() throws ParserConfigurationException, SAXException, IOException
 	   {
-	      //Initialize a list of employees
+	      //Initialize a list of sports
 	      List<Sport> sports = new ArrayList<Sport>();
 	      Sport sport = null;
 	       
@@ -36,12 +36,12 @@ public class XmlMetode {
 	         if (node.getNodeType() == Node.ELEMENT_NODE)
 	         {
 	            Element eElement = (Element) node;
-	            //Create new Employee Object
+	            //Create new Sport Object
 	            sport = new Sport();
 	            sport.setId(eElement.getAttribute("id"));
 	            sport.setName(eElement.getAttribute("name"));
 	             
-	            //Add Employee to list
+	            //Add Sport to list
 	            sports.add(sport);
 	         }
 	      }
