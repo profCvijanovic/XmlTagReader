@@ -16,6 +16,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import model.Category;
+import model.Competitor;
 import model.Sport;
 
 public class XmlMetode {
@@ -85,6 +86,94 @@ public class XmlMetode {
 	      return category;
 	   }
 	   
+	   public static List<Competitor> parseCompetitorsXML(String xmlFile) throws ParserConfigurationException, SAXException, IOException
+	   {
+	      //Initialize a list of competitors
+	      List<Competitor> competitors = new ArrayList<Competitor>();
+	      Competitor competitor = null;
+	       
+	      DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	      DocumentBuilder builder = factory.newDocumentBuilder();
+	      Document document = builder.parse(new File(xmlFile));
+	      document.getDocumentElement().normalize();
+	      NodeList nList = document.getElementsByTagName("competitor");
+	      for (int temp = 0; temp < nList.getLength(); temp++)
+	      {
+	         Node node = nList.item(temp);
+	         if (node.getNodeType() == Node.ELEMENT_NODE)
+	         {
+	            Element eElement = (Element) node;
+	            
+	            //Create new Competitor Object
+	            competitor = new Competitor();
+	            competitor.setId(eElement.getAttribute("id"));
+	            competitor.setName(eElement.getAttribute("name"));
+	            competitor.setCountry_code(eElement.getAttribute("country_code"));
+	            //Add competitor to list
+	            competitors.add(competitor);
+	         }
+	      }
+	      return competitors;
+	   }
+	   
+	   public static Competitor dajMiGostujucegTakmicara(String xmlFile) throws ParserConfigurationException, SAXException, IOException
+	   {
+	     
+	      Competitor competitor = null;
+	       
+	      DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	      DocumentBuilder builder = factory.newDocumentBuilder();
+	      Document document = builder.parse(new File(xmlFile));
+	      document.getDocumentElement().normalize();
+	      NodeList nList = document.getElementsByTagName("competitor");
+	      for (int temp = 0; temp < nList.getLength(); temp++)
+	      {
+	         Node node = nList.item(temp);
+	         if (node.getNodeType() == Node.ELEMENT_NODE)
+	         {
+	            Element eElement = (Element) node;
+	            
+	            if(eElement.getAttribute("qualifier").equals("away")) {
+		            //Create new Competitor Object
+		            competitor = new Competitor();
+		            competitor.setId(eElement.getAttribute("id"));
+		            competitor.setName(eElement.getAttribute("name"));
+		            competitor.setCountry_code(eElement.getAttribute("country_code"));
+	            }
+	         }
+	      }
+	      return competitor;
+	   }
+	   
+	   public static Competitor dajMiDomacegTakmicara(String xmlFile) throws ParserConfigurationException, SAXException, IOException
+	   {
+	     
+	      Competitor competitor = null;
+	       
+	      DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+	      DocumentBuilder builder = factory.newDocumentBuilder();
+	      Document document = builder.parse(new File(xmlFile));
+	      document.getDocumentElement().normalize();
+	      NodeList nList = document.getElementsByTagName("competitor");
+	      for (int temp = 0; temp < nList.getLength(); temp++)
+	      {
+	         Node node = nList.item(temp);
+	         if (node.getNodeType() == Node.ELEMENT_NODE)
+	         {
+	            Element eElement = (Element) node;
+	            
+	            if(eElement.getAttribute("qualifier").equals("home")) {
+		            //Create new Competitor Object
+		            competitor = new Competitor();
+		            competitor.setId(eElement.getAttribute("id"));
+		            competitor.setName(eElement.getAttribute("name"));
+		            competitor.setCountry_code(eElement.getAttribute("country_code"));
+	            }
+	         }
+	      }
+	      return competitor;
+	   }
+		   
 	   
 	   
 
